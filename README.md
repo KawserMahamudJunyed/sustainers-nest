@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
   <img src="logo.jpg" alt="Sustainers NEST Logo" width="200" />
   <h1>Sustainers NEST 🌍💡</h1>
   <p><b>Nature • Science • Technology</b></p>
@@ -49,4 +49,4 @@ This source code, distinctive website design, architecture, and all associated v
 - ❌ Distributing or publicly displaying the repository contents
 - ❌ Using the code for any personal, commercial, or third-party purpose
 
-Unauthorized use of this repository's contents—in whole or in part—is strictly prohibited under international copyright law and will be actively enforced.
+Unauthorized use of this repository's contents-in whole or in part-is strictly prohibited under international copyright law and will be actively enforced.
