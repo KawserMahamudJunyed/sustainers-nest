@@ -1,66 +1,52 @@
-# Sustainers NEST
+<div align="center">
+  <img src="logo.jpg" alt="Sustainers NEST Logo" width="200" />
+  <h1>Sustainers NEST 🌍💡</h1>
+  <p><b>Nature • Science • Technology</b></p>
+  <p>Empowering the next generation of sustainability leaders.</p>
+</div>
 
-![Sustainers NEST](logo.jpg)
+---
 
-**Sustainers NEST (Nature, Environment, Science & Technology)** is a youth-driven organization dedicated to empowering the next generation of sustainability leaders. This repository contains the source code for the official multi-page organization website.
+> 🔒 **CONFIDENTIAL & PROPRIETARY**
+> This repository and its contents are the exclusive property of Sustainers NEST. Access is strictly limited to authorized personnel.
 
 ## 🌟 Overview
+**Sustainers NEST** is a youth-driven organization dedicated to building innovative, nature-inspired solutions for a sustainable world. This repository contains the source code for our official organization website. 
 
-The Sustainers NEST website is a statically generated, responsive web application inspired by top environmental organizations. It features a modern "nature-tech" design system, interactive UI elements, and a clean, accessible layout designed to highlight the organization's impact.
+The website is designed with a modern **"Nature-Tech" aesthetic** (vibrant greens, cyans, and deep forest tones), highlighting our three core pillars: Nature, Science, and Technology.
 
-### Core Pages
-- **Home (`index.html`)**: Hero section, impact statistics, core pillars, and featured programs.
-- **About (`about.html`)**: The organization's story, mission & vision, interactive timeline, and team.
-- **Programs (`programs.html`)**: Detailed cards for all initiatives across Nature, Science, and Technology.
-- **Events (`events.html`)**: Upcoming workshops, past symposiums, and latest announcements.
-- **Get Involved (`get-involved.html`)**: Volunteer pathways, member journeys, and FAQs.
-- **Contact (`contact.html`)**: Contact forms, interactive touchpoints, and social links.
+## 🏗️ Architecture & Pages
+Our platform is a clean, multi-page static website optimized for blazing-fast performance:
 
-## 🛠️ Tech Stack & Features
-- **Frontend**: Vanilla HTML5, CSS3, JavaScript (No heavy frameworks, ensuring blazing fast load times).
-- **Design System**: Custom CSS variables, CSS Grid/Flexbox, dynamic dark mode integrated.
-- **Interactivity**: Custom scroll-reveal animations, counter animations, responsive mobile navigation, and interactive FAQ accordions.
-- **Hosting Configuration**: Configured for Vercel with clean URL routing (`vercel.json`).
+- 🏠 **[Home (`index.html`)](index.html)**: High-impact hero section, core pillars, and featured programs.
+- 📖 **[About Us (`about.html`)](about.html)**: Our story, mission/vision, timeline, and leadership team.
+- 🌱 **[Programs (`programs.html`)](programs.html)**: Comprehensive breakdown of our eco-tech initiatives.
+- 📅 **[Events (`events.html`)](events.html)**: Upcoming hackathons, workshops, and past symposiums.
+- 🤝 **[Get Involved (`get-involved.html`)](get-involved.html)**: Volunteer pathways and member journeys.
+- ✉️ **[Contact (`contact.html`)](contact.html)**: Connection touchpoints and social links.
 
-## 🚀 Local Development
+## 🛠️ Technology Stack
+Built without heavy visual frameworks to ensure absolute control over design, performance, and security:
+- **HTML5**: Semantic, accessible markup.
+- **CSS3 (Vanilla)**: Custom UI design system (`styles.css` ~950 lines). Features CSS Grid/Flexbox, dynamic variables, and responsive cascading.
+- **JavaScript (Vanilla)**: Scroll-reveal animations, counter tracking, and interactive mobile menus (`script.js`).
 
-To run this project locally, you don't need any complex build tools. You can use any local web server.
+## ☁️ Deployment Architecture
+This organization repository is securely connected to our private Vercel environment.
+- The `vercel.json` configuration file automatically handles clean URL routing and security headers.
+- All pushes to the main branch are automatically synced and deployed to our secure live domain. 
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/KawserMahamudJunyed/sustainers-nest.git
-   cd sustainers-nest
-   ```
+*(Note: Direct pushing to production should only be done by authorized administrators).*
 
-2. Start a local server. If you have Node.js installed, you can use `npx`:
-   ```bash
-   npx serve .
-   ```
-   Or using Python:
-   ```bash
-   python -m http.server 3000
-   ```
+## ⚖️ License & Legal
+**Copyright © 2026 Sustainers NEST. All rights reserved.**
 
-3. Open `http://localhost:3000` in your browser.
+This source code, distinctive website design, architecture, and all associated visual assets are the proprietary and confidential property of Sustainers NEST. 
 
-## 🌐 Deployment (Vercel)
+**STRICTLY PROHIBITED ACTIONS:**
+- ❌ Copying or duplicating the code or design
+- ❌ Modifying, adapting, or creating derivative works
+- ❌ Distributing or publicly displaying the repository contents
+- ❌ Using the code for any personal, commercial, or third-party purpose
 
-This project is pre-configured for seamless deployment to [Vercel](https://vercel.com/).
-
-1. Install the Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
-2. Deploy the project from the root directory:
-   ```bash
-   vercel
-   ```
-3. *(Optional)* To push to production:
-   ```bash
-   vercel --prod
-   ```
-
-The `vercel.json` file handles dropping the `.html` extensions automatically for clean URLs (e.g., `/about` instead of `/about.html`).
-
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Unauthorized use of this repository's contents—in whole or in part—is strictly prohibited under international copyright law and will be actively enforced.
