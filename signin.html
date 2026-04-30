@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 
@@ -42,9 +42,9 @@
                         <label for="loginPassword">Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="loginPassword" placeholder="Your password" required minlength="6">
-                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
-                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="m1 1 22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
+                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)" aria-label="Show password" style="position:absolute;right:0.65rem;top:50%;transform:translateY(-50%);background:none;border:none;padding:0.35rem;cursor:pointer;display:flex;align-items:center">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="rgba(240,247,237,0.45)" stroke-width="2" style="width:18px;height:16px;display:block"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="rgba(240,247,237,0.45)" stroke-width="2" style="width:18px;height:16px;display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="m1 1 22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
                             </button>
                         </div>
                     </div>
@@ -84,14 +84,17 @@
             const btn = document.getElementById('loginBtn');
             const errEl = document.getElementById('loginError');
             errEl.style.display = 'none';
-            setButtonLoading(btn, true);
 
             try {
+                if (typeof setButtonLoading === 'function') setButtonLoading(btn, true);
+
+                if (!supabase) throw new Error('Connection error. Please refresh the page.');
+
                 await signIn(
                     document.getElementById('loginEmail').value,
                     document.getElementById('loginPassword').value
                 );
-                showToast('Signed in successfully!');
+                if (typeof showToast === 'function') showToast('Signed in successfully!');
                 const admin = await isAdmin();
                 setTimeout(() => {
                     window.location.href = admin ? '/admin' : '/';
@@ -99,25 +102,28 @@
             } catch (err) {
                 errEl.textContent = err.message || 'Invalid email or password.';
                 errEl.style.display = 'block';
-                setButtonLoading(btn, false);
+                if (typeof setButtonLoading === 'function') setButtonLoading(btn, false);
             }
         });
 
         // ── Logout Helper ──
         async function handleLogout(e) {
             e.preventDefault();
-            await signOut();
-            showToast('Signed out.');
+            try { await signOut(); } catch(err) { console.error(err); }
+            if (typeof showToast === 'function') showToast('Signed out.');
             window.location.href = '/';
         }
 
         // Redirect if already logged in
         (async () => {
-            const user = await getCurrentUser();
-            if (user) {
-                const admin = await isAdmin();
-                window.location.href = admin ? '/admin' : '/';
-            }
+            try {
+                if (!supabase) return;
+                const user = await getCurrentUser();
+                if (user) {
+                    const admin = await isAdmin();
+                    window.location.href = admin ? '/admin' : '/';
+                }
+            } catch(e) { console.error('Auth check:', e); }
         })();
     </script>
 </body>
