@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Involved - Sustainers NEST</title>
-    <meta name="description" content="Join Sustainers NEST as a volunteer, partner, donor, or member. Multiple ways to contribute to a sustainable future.">
+    <meta name="description" content="Join Sustainers NEST as a volunteer, partner, donor, or member.">
     <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,21 +12,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-
-
-
     <!-- NAVBAR -->
-    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="get-involved.html" class="nav-cta">Join Now</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="login.html" class="auth-login-link">Login</a><a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a><a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a><a href="get-involved.html" class="nav-cta">Join Now</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
 
     <!-- PAGE HERO -->
     <section class="page-hero">
         <div class="container page-hero-content">
-            <div class="breadcrumb">
-                <a href="index.html">Home</a>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                <span>Get Involved</span>
-            </div>
+            <div class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span>Get Involved</span></div>
             <h1>Get <span class="gradient-text">Involved</span></h1>
             <p>There are many ways to contribute to a sustainable future. Find the right path for you.</p>
         </div>
@@ -35,123 +27,31 @@
     <!-- PATHWAYS -->
     <section class="section">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Choose Your Path</span>
-                <h2 class="section-title">Ways to <span class="gradient-text">Contribute</span></h2>
-            </div>
-            <div class="pathway-grid reveal-stagger">
-                <div class="pathway-card card reveal">
-                    <div class="pathway-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <h3>Volunteer</h3>
-                    <p>Join our programs on the ground. Help run workshops, plant trees, mentor youth, or support events.</p>
-                    <a href="#join-form" class="btn btn-outline" style="font-size:.82rem; padding:.6rem 1.2rem;">Apply Now</a>
-                </div>
-                <div class="pathway-card card reveal">
-                    <div class="pathway-icon" style="background:rgba(34,211,238,0.12); color:var(--cyan-400);">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
-                    </div>
-                    <h3>Partner</h3>
-                    <p>Collaborate with us as an institution, school, or organization. We co-create programs tailored to your community.</p>
-                    <a href="contact.html" class="btn btn-outline" style="font-size:.82rem; padding:.6rem 1.2rem;">Let's Talk</a>
-                </div>
-                <div class="pathway-card card reveal">
-                    <div class="pathway-icon" style="background:rgba(245,158,11,0.12); color:var(--amber-400);">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                    </div>
-                    <h3>Donate</h3>
-                    <p>Your contribution directly funds tree planting, research equipment, and educational materials for youth programs.</p>
-                    <a href="contact.html" class="btn btn-outline" style="font-size:.82rem; padding:.6rem 1.2rem;">Contribute</a>
-                </div>
-                <div class="pathway-card card reveal">
-                    <div class="pathway-icon" style="background:rgba(139,92,246,0.12); color:#a78bfa;">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/></svg>
-                    </div>
-                    <h3>Become a Member</h3>
-                    <p>Get exclusive access to workshops, networks, and resources. Be part of a global community of young changemakers.</p>
-                    <a href="#join-form" class="btn btn-outline" style="font-size:.82rem; padding:.6rem 1.2rem;">Join Now</a>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Choose Your Path</span><h2 class="section-title">Ways to <span class="gradient-text">Contribute</span></h2></div>
+            <div class="pathway-grid reveal-stagger" id="pathwayGrid"><!-- Dynamic --></div>
         </div>
     </section>
 
-    <!-- VOLUNTEER JOURNEY -->
+    <!-- JOURNEY -->
     <section class="section section-alt">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Your Journey</span>
-                <h2 class="section-title">How to <span class="gradient-text">Join Us</span></h2>
-                <p class="section-desc">From application to impact - here's what your journey looks like.</p>
-            </div>
-            <div class="journey-steps reveal-stagger">
-                <div class="journey-step card reveal">
-                    <div class="journey-step-num">1</div>
-                    <h4>Apply</h4>
-                    <p>Fill out the form below with your details and interests.</p>
-                </div>
-                <div class="journey-step card reveal">
-                    <div class="journey-step-num">2</div>
-                    <h4>Interview</h4>
-                    <p>A short conversation to understand your goals and match you to the right program.</p>
-                </div>
-                <div class="journey-step card reveal">
-                    <div class="journey-step-num">3</div>
-                    <h4>Onboard</h4>
-                    <p>Join your cohort, receive training materials, and connect with your mentor.</p>
-                </div>
-                <div class="journey-step card reveal">
-                    <div class="journey-step-num">4</div>
-                    <h4>Serve & Grow</h4>
-                    <p>Contribute to real projects, build your portfolio, and grow as a sustainability leader.</p>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Your Journey</span><h2 class="section-title">How to <span class="gradient-text">Join Us</span></h2><p class="section-desc">From application to impact - here's what your journey looks like.</p></div>
+            <div class="journey-steps reveal-stagger" id="journeySteps"><!-- Dynamic --></div>
         </div>
     </section>
 
     <!-- JOIN FORM -->
     <section class="section" id="join-form">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Ready?</span>
-                <h2 class="section-title">Join the <span class="gradient-text">NEST</span></h2>
-                <p class="section-desc">Fill out this form and we'll get back to you within 48 hours.</p>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Ready?</span><h2 class="section-title">Join the <span class="gradient-text">NEST</span></h2><p class="section-desc">Fill out this form and we'll get back to you within 48 hours.</p></div>
             <div style="max-width:600px; margin:0 auto;">
                 <form class="form-grid reveal" id="joinForm">
-                    <div class="form-group">
-                        <label for="joinName">Full Name</label>
-                        <input type="text" id="joinName" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="joinEmail">Email</label>
-                        <input type="email" id="joinEmail" placeholder="you@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="joinPhone">Phone</label>
-                        <input type="tel" id="joinPhone" placeholder="+880 1XXX-XXXXXX">
-                    </div>
-                    <div class="form-group">
-                        <label for="joinRole">I want to…</label>
-                        <select id="joinRole" required>
-                            <option value="" disabled selected>Select an option</option>
-                            <option>Volunteer</option>
-                            <option>Partner with NEST</option>
-                            <option>Become a Member</option>
-                            <option>Donate</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group form-full">
-                        <label for="joinMessage">Tell us about yourself</label>
-                        <textarea id="joinMessage" placeholder="Your background, interests, and how you'd like to contribute…" rows="4"></textarea>
-                    </div>
-                    <div class="form-group form-full">
-                        <button type="submit" class="btn btn-primary btn-full">
-                            Submit Application
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </button>
-                    </div>
+                    <div class="form-group"><label for="joinName">Full Name</label><input type="text" id="joinName" placeholder="Your name" required></div>
+                    <div class="form-group"><label for="joinEmail">Email</label><input type="email" id="joinEmail" placeholder="you@example.com" required></div>
+                    <div class="form-group"><label for="joinPhone">Phone</label><input type="tel" id="joinPhone" placeholder="+880 1XXX-XXXXXX"></div>
+                    <div class="form-group"><label for="joinRole">I want to…</label><select id="joinRole" required><option value="" disabled selected>Select an option</option><option>Volunteer</option><option>Partner with NEST</option><option>Become a Member</option><option>Donate</option><option>Other</option></select></div>
+                    <div class="form-group form-full"><label for="joinMessage">Tell us about yourself</label><textarea id="joinMessage" placeholder="Your background, interests, and how you'd like to contribute…" rows="4"></textarea></div>
+                    <div class="form-group form-full"><button type="submit" class="btn btn-primary btn-full">Submit Application <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></div>
                 </form>
             </div>
         </div>
@@ -160,52 +60,16 @@
     <!-- FAQ -->
     <section class="section section-alt">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">FAQ</span>
-                <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
-            </div>
-            <div class="faq-list reveal">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Who can join Sustainers NEST?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Anyone passionate about sustainability can join! We welcome students (Grade 8 and above), university students, educators, researchers, and professionals. Our programs are designed for diverse skill levels and backgrounds.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Is there a membership fee?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Most of our programs and volunteer opportunities are free. Some specialized workshops and certifications may have a nominal fee to cover materials and logistics. We believe cost should never be a barrier to participation.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How much time commitment is required?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">It depends on the program! Hackathons are 48-hour events, the Green Campus Initiative involves weekly sessions, and volunteering can be as flexible as a few hours per month. We work around your schedule.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can organizations partner with Sustainers NEST?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Absolutely! We actively seek partnerships with schools, universities, NGOs, and businesses. We co-design programs and initiatives that align with both our mission and your goals. Reach out via our Contact page.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Do I get a certificate?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Yes! All program participants and volunteers receive official certificates upon completion. Hackathon winners and research contributors receive special recognition and awards.</div></div>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">FAQ</span><h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2></div>
+            <div class="faq-list reveal" id="faqList"><!-- Dynamic --></div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><p class="footer-tagline">Integrating nature, science, and technology to empower the next generation for a sustainable future.</p></div><div class="footer-links"><h4>Explore</h4><ul><li><a href="about.html">About Us</a></li><li><a href="programs.html">Programs</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-links"><h4>Get Involved</h4><ul><li><a href="get-involved.html">Join Us</a></li><li><a href="get-involved.html">Volunteer</a></li><li><a href="get-involved.html">Partner</a></li><li><a href="get-involved.html">Donate</a></li></ul></div><div class="footer-links"><h4>Connect</h4><div class="footer-social"><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="5"/></svg></a><a href="#" class="social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Sustainers NEST. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
+    <script src="page-loader.js"></script>
 </body>
 </html>

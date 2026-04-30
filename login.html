@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sustainers NEST</title>
+    <meta name="description" content="Login to the Sustainers NEST admin dashboard.">
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="login.html" class="auth-login-link active">Login</a><a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a><a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="container page-hero-content">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                <span>Login</span>
+            </div>
+            <h1>Welcome <span class="gradient-text">Back</span></h1>
+            <p>Sign in to access the admin dashboard and manage site content.</p>
+        </div>
+    </section>
+
+    <!-- LOGIN FORM -->
+    <section class="section">
+        <div class="container">
+            <div style="max-width:440px; margin:0 auto;">
+                <!-- Tab Toggle -->
+                <div class="auth-tabs reveal">
+                    <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Sign In</button>
+                    <button class="auth-tab" id="signupTab" onclick="switchAuthTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="form-grid reveal" id="loginForm" style="margin-top:0;">
+                    <div class="form-group form-full">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Your password" required minlength="6">
+                    </div>
+                    <div class="form-group form-full">
+                        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+                            Sign In
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                    <p class="auth-hint" id="loginError" style="display:none; color:#ef4444; text-align:center;"></p>
+                </form>
+
+                <!-- Signup Form -->
+                <form class="form-grid reveal" id="signupForm" style="display:none; margin-top:0;">
+                    <div class="form-group form-full">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Choose a password (min 6 chars)" required minlength="6">
+                    </div>
+                    <div class="form-group form-full">
+                        <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
+                            Create Account
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                    <p class="auth-hint" id="signupError" style="display:none; color:#ef4444; text-align:center;"></p>
+
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><p class="footer-tagline">Integrating nature, science, and technology to empower the next generation for a sustainable future.</p></div><div class="footer-links"><h4>Explore</h4><ul><li><a href="about.html">About Us</a></li><li><a href="programs.html">Programs</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-links"><h4>Get Involved</h4><ul><li><a href="get-involved.html">Join Us</a></li><li><a href="get-involved.html">Volunteer</a></li><li><a href="get-involved.html">Partner</a></li><li><a href="get-involved.html">Donate</a></li></ul></div><div class="footer-links"><h4>Connect</h4><div class="footer-social"><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="5"/></svg></a><a href="#" class="social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Sustainers NEST. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // ── Auth Tab Switching ──
+        function switchAuthTab(tab) {
+            document.getElementById('loginForm').style.display = tab === 'login' ? '' : 'none';
+            document.getElementById('signupForm').style.display = tab === 'signup' ? '' : 'none';
+            document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+            document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('signupError').style.display = 'none';
+        }
+
+        // ── Login Handler ──
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const errEl = document.getElementById('loginError');
+            errEl.style.display = 'none';
+            setButtonLoading(btn, true);
+
+            try {
+                await signIn(
+                    document.getElementById('loginEmail').value,
+                    document.getElementById('loginPassword').value
+                );
+                showToast('Signed in successfully!');
+                const admin = await isAdmin();
+                setTimeout(() => {
+                    window.location.href = admin ? 'admin.html' : 'index.html';
+                }, 800);
+            } catch (err) {
+                errEl.textContent = err.message || 'Invalid email or password.';
+                errEl.style.display = 'block';
+                setButtonLoading(btn, false);
+            }
+        });
+
+        // ── Signup Handler ──
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('signupBtn');
+            const errEl = document.getElementById('signupError');
+            errEl.style.display = 'none';
+            setButtonLoading(btn, true);
+
+            try {
+                await signUp(
+                    document.getElementById('signupEmail').value,
+                    document.getElementById('signupPassword').value,
+                    document.getElementById('signupName').value
+                );
+                showToast('Account created! You can now sign in.', 'success');
+                switchAuthTab('login');
+                document.getElementById('loginEmail').value = document.getElementById('signupEmail').value;
+            } catch (err) {
+                errEl.textContent = err.message || 'Could not create account.';
+                errEl.style.display = 'block';
+            } finally {
+                setButtonLoading(btn, false);
+            }
+        });
+
+        // ── Logout Helper ──
+        async function handleLogout(e) {
+            e.preventDefault();
+            await signOut();
+            showToast('Signed out.');
+            window.location.href = 'index.html';
+        }
+
+        // Redirect if already logged in
+        (async () => {
+            const user = await getCurrentUser();
+            if (user) {
+                const admin = await isAdmin();
+                window.location.href = admin ? 'admin.html' : 'index.html';
+            }
+        })();
+    </script>
+</body>
+</html>

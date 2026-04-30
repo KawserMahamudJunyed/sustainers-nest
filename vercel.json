@@ -4,7 +4,9 @@
         { "source": "/programs", "destination": "/programs.html" },
         { "source": "/events", "destination": "/events.html" },
         { "source": "/get-involved", "destination": "/get-involved.html" },
-        { "source": "/contact", "destination": "/contact.html" }
+        { "source": "/contact", "destination": "/contact.html" },
+        { "source": "/login", "destination": "/login.html" },
+        { "source": "/admin", "destination": "/admin.html" }
     ],
     "headers": [
         {

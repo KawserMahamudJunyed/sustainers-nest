@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,21 +12,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-
-
-
     <!-- NAVBAR -->
-    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="get-involved.html" class="nav-cta">Join Now</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="login.html" class="auth-login-link">Login</a><a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a><a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a><a href="get-involved.html" class="nav-cta">Join Now</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
 
     <!-- PAGE HERO -->
     <section class="page-hero">
         <div class="container page-hero-content">
-            <div class="breadcrumb">
-                <a href="index.html">Home</a>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                <span>Events</span>
-            </div>
+            <div class="breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg><span>Events</span></div>
             <h1>Events & <span class="gradient-text">Announcements</span></h1>
             <p>Stay updated on our upcoming activities, workshops, and community gatherings.</p>
         </div>
@@ -35,120 +27,24 @@
     <!-- UPCOMING EVENTS -->
     <section class="section">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Coming Up</span>
-                <h2 class="section-title">Upcoming <span class="gradient-text">Events</span></h2>
-            </div>
-            <div class="events-grid reveal-stagger">
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-4 5-8 8-8 13a8 8 0 0016 0c0-5-4-8-8-13z"/></svg>
-                        <span class="event-date-badge">Apr 15, 2026</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>Green Campus Workshop</h3>
-                        <p>Hands-on workshop for students to learn rooftop gardening, composting, and biodiversity mapping techniques.</p>
-                        <a href="#" class="program-link">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                    </div>
-                </div>
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="12" height="12" rx="2"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.3"/><line x1="12" y1="1" x2="12" y2="6" stroke-width="1.5" opacity="0.5"/><line x1="12" y1="18" x2="12" y2="23" stroke-width="1.5" opacity="0.5"/></svg>
-                        <span class="event-date-badge">May 10-11, 2026</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>EcoTech Hackathon 2.0</h3>
-                        <p>48-hour innovation sprint - teams build AI-powered sustainability solutions. Open to all university students.</p>
-                        <a href="#" class="program-link">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                    </div>
-                </div>
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                        <span class="event-date-badge">Jun 5, 2026</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>Annual Sustainability Summit</h3>
-                        <p>A full-day conference featuring keynotes, panel discussions, and networking with sustainability leaders and youth innovators.</p>
-                        <a href="#" class="program-link">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                    </div>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Coming Up</span><h2 class="section-title">Upcoming <span class="gradient-text">Events</span></h2></div>
+            <div class="events-grid reveal-stagger" id="upcomingEvents"><!-- Dynamic --></div>
         </div>
     </section>
 
     <!-- PAST EVENTS -->
     <section class="section section-alt">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">Looking Back</span>
-                <h2 class="section-title">Past <span class="gradient-text">Events</span></h2>
-            </div>
-            <div class="events-grid reveal-stagger">
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-4 5-8 8-8 13a8 8 0 0016 0c0-5-4-8-8-13z"/></svg>
-                        <span class="event-date-badge">Jan 2026</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>Winter Tree Planting Drive</h3>
-                        <p>500 trees planted across 3 districts with over 200 volunteers participating in this community drive.</p>
-                    </div>
-                </div>
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 3" opacity="0.5"/></svg>
-                        <span class="event-date-badge">Nov 2025</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>Youth Research Symposium</h3>
-                        <p>Young scientists presented 30 research posters on topics from water quality to urban biodiversity mapping.</p>
-                    </div>
-                </div>
-                <div class="event-card card reveal">
-                    <div class="event-card-img">
-                        <svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="6" width="12" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
-                        <span class="event-date-badge">Sep 2025</span>
-                    </div>
-                    <div class="event-card-body">
-                        <h3>EcoTech Hackathon 1.0</h3>
-                        <p>Our inaugural hackathon with 200+ participants building IoT and AI solutions for environmental challenges.</p>
-                    </div>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">Looking Back</span><h2 class="section-title">Past <span class="gradient-text">Events</span></h2></div>
+            <div class="events-grid reveal-stagger" id="pastEvents"><!-- Dynamic --></div>
         </div>
     </section>
 
     <!-- ANNOUNCEMENTS -->
     <section class="section">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-tag">News</span>
-                <h2 class="section-title">Latest <span class="gradient-text">Announcements</span></h2>
-            </div>
-            <div class="announcement-list reveal-stagger">
-                <div class="announcement-item card reveal">
-                    <span class="announcement-date">Mar 2026</span>
-                    <div>
-                        <h4>Website Launch!</h4>
-                        <p>We're excited to launch our new website - your one-stop destination for all things Sustainers NEST.</p>
-                    </div>
-                </div>
-                <div class="announcement-item card reveal">
-                    <span class="announcement-date">Feb 2026</span>
-                    <div>
-                        <h4>New Partnership Announcement</h4>
-                        <p>Sustainers NEST has partnered with environmental organizations to expand our Green Campus Initiative.</p>
-                    </div>
-                </div>
-                <div class="announcement-item card reveal">
-                    <span class="announcement-date">Jan 2026</span>
-                    <div>
-                        <h4>Volunteer Applications Open</h4>
-                        <p>Join our growing volunteer network! Applications are now open for all programs and events.</p>
-                    </div>
-                </div>
-            </div>
+            <div class="section-header reveal"><span class="section-tag">News</span><h2 class="section-title">Latest <span class="gradient-text">Announcements</span></h2></div>
+            <div class="announcement-list reveal-stagger" id="announcementsList"><!-- Dynamic --></div>
         </div>
     </section>
 
@@ -158,16 +54,16 @@
             <h2>Don't Miss Out!</h2>
             <p>Subscribe to our newsletter and be the first to know about upcoming events and opportunities.</p>
             <div style="max-width:420px; margin:0 auto;">
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Your email address">
-                    <button type="button">Subscribe</button>
-                </div>
+                <div class="newsletter-form"><input type="email" placeholder="Your email address"><button type="button">Subscribe</button></div>
             </div>
         </div></div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><p class="footer-tagline">Integrating nature, science, and technology to empower the next generation for a sustainable future.</p></div><div class="footer-links"><h4>Explore</h4><ul><li><a href="about.html">About Us</a></li><li><a href="programs.html">Programs</a></li><li><a href="events.html">Events</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-links"><h4>Get Involved</h4><ul><li><a href="get-involved.html">Join Us</a></li><li><a href="get-involved.html">Volunteer</a></li><li><a href="get-involved.html">Partner</a></li><li><a href="get-involved.html">Donate</a></li></ul></div><div class="footer-links"><h4>Connect</h4><div class="footer-social"><a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="social-btn" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="5"/></svg></a><a href="#" class="social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Sustainers NEST. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
+    <script src="page-loader.js"></script>
 </body>
 </html>

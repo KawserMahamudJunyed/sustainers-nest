@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +29,9 @@
                 <a href="events.html">Events</a>
                 <a href="get-involved.html">Get Involved</a>
                 <a href="contact.html">Contact</a>
+                <a href="login.html" class="auth-login-link">Login</a>
+                <a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a>
+                <a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a>
                 <a href="get-involved.html" class="nav-cta">Join Now</a>
             </div>
             <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -199,35 +202,8 @@
                 <span class="section-tag">Impact</span>
                 <h2 class="section-title">Numbers That <span class="gradient-text">Speak</span></h2>
             </div>
-            <div class="stats-row reveal-stagger">
-                <div class="stat-box card reveal">
-                    <div class="stat-icon stat-icon-green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c-4 5-8 8-8 13a8 8 0 0016 0c0-5-4-8-8-13z"/></svg>
-                    </div>
-                    <span class="stat-number" data-count="2500">0</span>
-                    <span class="stat-label">Trees Planted</span>
-                </div>
-                <div class="stat-box card reveal">
-                    <div class="stat-icon stat-icon-cyan">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 3" opacity="0.5"/><circle cx="12" cy="3" r="1.5" fill="currentColor"/></svg>
-                    </div>
-                    <span class="stat-number" data-count="85">0</span>
-                    <span class="stat-label">Research Papers</span>
-                </div>
-                <div class="stat-box card reveal">
-                    <div class="stat-icon stat-icon-amber">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="12" height="12" rx="2"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.3"/><line x1="12" y1="1" x2="12" y2="6" stroke-width="1.5" opacity="0.5"/><line x1="12" y1="18" x2="12" y2="23" stroke-width="1.5" opacity="0.5"/></svg>
-                    </div>
-                    <span class="stat-number" data-count="30">0</span>
-                    <span class="stat-label">Tech Solutions Deployed</span>
-                </div>
-                <div class="stat-box card reveal">
-                    <div class="stat-icon stat-icon-white">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="8" r="5"/><path d="M2 21c0-3.87 3.13-7 7-7h2c3.87 0 7 3.13 7 7"/><circle cx="18" cy="8" r="3" opacity="0.5"/><path d="M20 21c0-2.76-1.12-5.26-2.93-7.07" opacity="0.5"/></svg>
-                    </div>
-                    <span class="stat-number" data-count="1200">0</span>
-                    <span class="stat-label">Community Members</span>
-                </div>
+            <div class="stats-row reveal-stagger" id="statsRow">
+                <!-- Loaded dynamically from Supabase -->
             </div>
         </div>
     </section>
@@ -240,25 +216,8 @@
                 <h2 class="section-title">Featured <span class="gradient-text">Programs</span></h2>
                 <p class="section-desc">From classrooms to communities, our programs inspire action and deliver impact.</p>
             </div>
-            <div class="programs-grid reveal-stagger">
-                <div class="program-card card reveal">
-                    <span class="program-tag tag-nature">Nature</span>
-                    <h3>Green Campus Initiative</h3>
-                    <p>Transforming school environments into living laboratories with rooftop gardens, composting, and biodiversity zones.</p>
-                    <a href="programs.html" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                </div>
-                <div class="program-card card reveal">
-                    <span class="program-tag tag-science">Science</span>
-                    <h3>Youth Research Lab</h3>
-                    <p>A mentorship-driven program where young scientists tackle real environmental challenges through experimentation.</p>
-                    <a href="programs.html" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                </div>
-                <div class="program-card card reveal">
-                    <span class="program-tag tag-tech">Technology</span>
-                    <h3>EcoTech Hackathons</h3>
-                    <p>48-hour innovation sprints where teams design and prototype technology solutions for sustainability problems.</p>
-                    <a href="programs.html" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-                </div>
+            <div class="programs-grid reveal-stagger" id="featuredPrograms">
+                <!-- Loaded dynamically from Supabase -->
             </div>
             <div style="text-align:center; margin-top:2.5rem;" class="reveal">
                 <a href="programs.html" class="btn btn-outline">View All Programs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
@@ -333,6 +292,9 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
+    <script src="page-loader.js"></script>
 </body>
 </html>
