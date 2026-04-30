@@ -5,13 +5,14 @@
 const SUPABASE_URL = 'https://cgpvrmcqpmznmnrsqyay.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNncHZybWNxcG16bm1ucnNxeWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNzU5MDMsImV4cCI6MjA5Mjc1MTkwM30.T9Urw9hZ07mljLK547f70LyztNV0FwNdG4DHMiHcR2k';
 
-// Initialize Supabase client
-let supabase;
+// Initialize Supabase client — use var so it's on window (accessible by all scripts)
+var supabase = null;
 try {
-    if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
-        throw new Error('Supabase JS library not loaded. Check your CDN script tag.');
+    if (window.supabase && window.supabase.createClient) {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } else {
+        console.error('Supabase JS library not loaded. Check your CDN script tag.');
     }
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch (e) {
     console.error('Supabase init error:', e.message);
 }
@@ -19,12 +20,14 @@ try {
 // ── Auth Helpers ──
 
 async function signIn(email, password) {
+    if (!supabase) throw new Error('Not connected. Please refresh.');
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
     return data;
 }
 
 async function signUp(email, password, fullName) {
+    if (!supabase) throw new Error('Not connected. Please refresh.');
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -35,11 +38,13 @@ async function signUp(email, password, fullName) {
 }
 
 async function signOut() {
+    if (!supabase) return;
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
 }
 
 async function getCurrentUser() {
+    if (!supabase) return null;
     const { data: { user } } = await supabase.auth.getUser();
     return user;
 }
@@ -75,10 +80,12 @@ async function updateAuthUI() {
     });
 }
 
-// Listen for auth state changes
-supabase.auth.onAuthStateChange((event, session) => {
-    updateAuthUI();
-});
+// Listen for auth state changes (guarded)
+if (supabase) {
+    supabase.auth.onAuthStateChange((event, session) => {
+        updateAuthUI();
+    });
+}
 
 // ── Toast Notification System ──
 
