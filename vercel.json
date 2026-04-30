@@ -1,14 +1,5 @@
 {
-    "rewrites": [
-        { "source": "/about", "destination": "/about.html" },
-        { "source": "/programs", "destination": "/programs.html" },
-        { "source": "/events", "destination": "/events.html" },
-        { "source": "/get-involved", "destination": "/get-involved.html" },
-        { "source": "/contact", "destination": "/contact.html" },
-        { "source": "/login", "destination": "/login.html" },
-        { "source": "/signup", "destination": "/signup.html" },
-        { "source": "/admin", "destination": "/admin.html" }
-    ],
+    "cleanUrls": true,
     "headers": [
         {
             "source": "/(.*)",

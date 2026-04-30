@@ -1672,6 +1672,14 @@ button { font-family: inherit; cursor: pointer; }
 .password-toggle svg {
     width: 18px;
     height: 16px;
+    stroke: var(--text-muted);
+    display: block;
+    overflow: visible;
+    flex-shrink: 0;
+}
+
+.password-toggle:hover svg {
+    stroke: var(--accent);
 }
 
 /* ═══════════════════════════════════════════════════════

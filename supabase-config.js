@@ -6,6 +6,9 @@ const SUPABASE_URL = 'https://cgpvrmcqpmznmnrsqyay.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNncHZybWNxcG16bm1ucnNxeWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNzU5MDMsImV4cCI6MjA5Mjc1MTkwM30.T9Urw9hZ07mljLK547f70LyztNV0FwNdG4DHMiHcR2k';
 
 // Initialize Supabase client
+if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
+    console.error('Supabase JS library not loaded. Check your CDN script tag.');
+}
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── Auth Helpers ──

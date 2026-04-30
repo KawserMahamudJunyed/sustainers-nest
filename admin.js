@@ -5,9 +5,9 @@
 // Auth guard
 (async () => {
     const user = await getCurrentUser();
-    if (!user) { window.location.href = 'login.html'; return; }
+    if (!user) { window.location.href = '/signin'; return; }
     const admin = await isAdmin();
-    if (!admin) { window.location.href = 'index.html'; return; }
+    if (!admin) { window.location.href = '/'; return; }
     loadOverview();
 })();
 
@@ -228,4 +228,4 @@ async function deleteRow(table, id, reload) {
     showToast('Deleted'); reload();
 }
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-async function handleLogout(e) { e.preventDefault(); await signOut(); window.location.href = 'index.html'; }
+async function handleLogout(e) { e.preventDefault(); await signOut(); window.location.href = '/'; }

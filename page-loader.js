@@ -15,7 +15,7 @@ const TAG_CLASSES = { 'Nature': 'tag-nature', 'Science': 'tag-science', 'Technol
 
 // Detect current page
 function getPageName() {
-    const p = location.pathname.split('/').pop() || 'index.html';
+    const p = location.pathname.split('/').pop() || 'index';
     return p.replace('.html', '') || 'index';
 }
 
@@ -58,7 +58,7 @@ async function loadIndexPage() {
     // Featured programs
     const progGrid = document.getElementById('featuredPrograms');
     if (progGrid && programs) {
-        progGrid.innerHTML = programs.map(p => `<div class="program-card card reveal"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p><a href="programs.html" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>`).join('');
+        progGrid.innerHTML = programs.map(p => `<div class="program-card card reveal"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p><a href="/programs" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>`).join('');
     }
 }
 function animateC(el){const t=parseInt(el.dataset.count,10),d=2e3,s=performance.now();function e(t){return t===1?1:1-Math.pow(2,-10*t)}function k(n){const p=Math.min((n-s)/d,1);el.textContent=Math.floor(e(p)*t).toLocaleString();if(p<1)requestAnimationFrame(k);else el.textContent=t.toLocaleString()}requestAnimationFrame(k)}
@@ -285,5 +285,5 @@ async function handleLogout(e) {
     e.preventDefault();
     await signOut();
     showToast('Signed out.');
-    window.location.href = 'index.html';
+    window.location.href = '/';
 }

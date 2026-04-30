@@ -23,10 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     }
     // ── Active nav link ──
-    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const currentPage = location.pathname.split('/').pop() || '';
     document.querySelectorAll('.nav-links a').forEach(a => {
         const href = a.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) a.classList.add('active');
+        const hrefPage = href === '/' ? '' : href.replace('/', '').replace('.html', '');
+        if (hrefPage === currentPage || (currentPage === '' && (href === '/' || href === 'index.html'))) a.classList.add('active');
     });
     // ── Scroll reveal ──
     const revealEls = document.querySelectorAll('.reveal');
