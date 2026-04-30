@@ -1617,6 +1617,63 @@ button { font-family: inherit; cursor: pointer; }
     color: var(--text-light);
 }
 
+.auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-switch a {
+    color: var(--accent);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.auth-switch a:hover {
+    color: var(--green-300);
+    text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PASSWORD TOGGLE
+   ═══════════════════════════════════════════════════════ */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 3rem;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0.35rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    border-radius: 6px;
+    transition: color 0.3s, background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: var(--accent);
+    background: var(--accent-dim);
+}
+
+.password-toggle svg {
+    width: 18px;
+    height: 16px;
+}
+
 /* ═══════════════════════════════════════════════════════
    EVENT REGISTRATION MODAL
    ═══════════════════════════════════════════════════════ */

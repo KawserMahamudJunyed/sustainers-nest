@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Sustainers NEST</title>
-    <meta name="description" content="Sign in to the Sustainers NEST admin dashboard.">
+    <title>Sign Up - Sustainers NEST</title>
+    <meta name="description" content="Create your Sustainers NEST account and join the movement for a sustainable future.">
     <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="login.html" class="auth-login-link active">Sign In</a><a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a><a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+    <nav class="navbar" id="navbar"><div class="container nav-inner"><a href="index.html" class="nav-logo"><img src="logo.jpg" alt="Sustainers NEST Logo"><div class="nav-logo-text">Sustainers<br><span>NEST</span></div></a><div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="about.html">About</a><a href="programs.html">Programs</a><a href="events.html">Events</a><a href="get-involved.html">Get Involved</a><a href="contact.html">Contact</a><a href="login.html" class="auth-login-link">Sign In</a><a href="admin.html" class="auth-admin-link nav-cta" style="display:none">Admin</a><a href="#" class="auth-logout-btn" style="display:none" onclick="handleLogout(event)">Logout</a></div><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
 
     <!-- PAGE HERO -->
     <section class="page-hero">
@@ -22,41 +22,45 @@
             <div class="breadcrumb">
                 <a href="index.html">Home</a>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                <span>Sign In</span>
+                <span>Sign Up</span>
             </div>
-            <h1>Welcome <span class="gradient-text">Back</span></h1>
-            <p>Sign in to access the admin dashboard and manage site content.</p>
+            <h1>Create Your <span class="gradient-text">Account</span></h1>
+            <p>Join Sustainers NEST and become part of a community building a sustainable future.</p>
         </div>
     </section>
 
-    <!-- LOGIN FORM -->
+    <!-- SIGNUP FORM -->
     <section class="section">
         <div class="container">
             <div style="max-width:440px; margin:0 auto;">
-                <form class="form-grid reveal" id="loginForm" style="margin-top:0;">
+                <form class="form-grid reveal" id="signupForm" style="margin-top:0;">
                     <div class="form-group form-full">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="Your name" required>
                     </div>
                     <div class="form-group form-full">
-                        <label for="loginPassword">Password</label>
+                        <label for="signupEmail">Email</label>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="signupPassword">Password</label>
                         <div class="password-wrapper">
-                            <input type="password" id="loginPassword" placeholder="Your password" required minlength="6">
-                            <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
+                            <input type="password" id="signupPassword" placeholder="Choose a password (min 6 chars)" required minlength="6">
+                            <button type="button" class="password-toggle" onclick="togglePassword('signupPassword', this)" aria-label="Show password">
                                 <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="m1 1 22 22"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/></svg>
                             </button>
                         </div>
                     </div>
                     <div class="form-group form-full">
-                        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
-                            Sign In
+                        <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
+                            Create Account
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                     </div>
-                    <p class="auth-hint" id="loginError" style="display:none; color:#ef4444; text-align:center;"></p>
+                    <p class="auth-hint" id="signupError" style="display:none; color:#ef4444; text-align:center;"></p>
                 </form>
-                <p class="auth-switch reveal">Don't have an account? <a href="signup.html">Sign Up</a></p>
+                <p class="auth-switch reveal">Already have an account? <a href="login.html">Sign In</a></p>
             </div>
         </div>
     </section>
@@ -78,27 +82,28 @@
             btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
         }
 
-        // ── Login Handler ──
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        // ── Signup Handler ──
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('loginBtn');
-            const errEl = document.getElementById('loginError');
+            const btn = document.getElementById('signupBtn');
+            const errEl = document.getElementById('signupError');
             errEl.style.display = 'none';
             setButtonLoading(btn, true);
 
             try {
-                await signIn(
-                    document.getElementById('loginEmail').value,
-                    document.getElementById('loginPassword').value
+                await signUp(
+                    document.getElementById('signupEmail').value,
+                    document.getElementById('signupPassword').value,
+                    document.getElementById('signupName').value
                 );
-                showToast('Signed in successfully!');
-                const admin = await isAdmin();
+                showToast('Account created! Redirecting to sign in...', 'success');
                 setTimeout(() => {
-                    window.location.href = admin ? 'admin.html' : 'index.html';
-                }, 800);
+                    window.location.href = 'login.html';
+                }, 1200);
             } catch (err) {
-                errEl.textContent = err.message || 'Invalid email or password.';
+                errEl.textContent = err.message || 'Could not create account.';
                 errEl.style.display = 'block';
+            } finally {
                 setButtonLoading(btn, false);
             }
         });
