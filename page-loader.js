@@ -15,8 +15,9 @@ const TAG_CLASSES = { 'Nature': 'tag-nature', 'Science': 'tag-science', 'Technol
 
 // Detect current page
 function getPageName() {
-    const p = location.pathname.split('/').pop() || 'index';
-    return p.replace('.html', '') || 'index';
+    const path = location.pathname.replace(/^\/+|\/+$/g, '');
+    const p = path.split('/').pop() || 'index';
+    return p.replace('.html', '').toLowerCase() || 'index';
 }
 
 async function loadPageContent() {
