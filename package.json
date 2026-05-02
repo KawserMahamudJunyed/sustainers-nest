@@ -1,9 +1,0 @@
-{
-    "name": "sustainers-nest",
-    "version": "1.0.0",
-    "description": "Sustainers NEST — Nature, Science & Technology for a Sustainable Future",
-    "private": true,
-    "dependencies": {
-        "@supabase/supabase-js": "^2.105.1"
-    }
-}
