@@ -34,6 +34,10 @@ async function loadPageContent() {
     wireContactForm();
     wireJoinForm();
     wireNewsletterForms();
+    
+    // Trigger scroll reveal and counters for dynamic content
+    if (typeof window.initScrollReveal === 'function') window.initScrollReveal();
+    if (typeof window.initCounters === 'function') window.initCounters();
 }
 
 // ── INDEX PAGE ──

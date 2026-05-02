@@ -30,13 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hrefPage === currentPage || (currentPage === '' && (href === '/' || href === 'index.html'))) a.classList.add('active');
     });
     // ── Scroll reveal ──
-    const revealEls = document.querySelectorAll('.reveal');
-    if (revealEls.length) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-        }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-        revealEls.forEach(el => observer.observe(el));
-    }
+    window.initScrollReveal = function() {
+        const revealEls = document.querySelectorAll('.reveal:not(.visible)');
+        if (revealEls.length) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+            revealEls.forEach(el => observer.observe(el));
+        }
+    };
+    window.initScrollReveal();
+
     // ── Counter animation ──
     function animateCount(el) {
         const target = parseInt(el.dataset.count, 10);
@@ -50,13 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         requestAnimationFrame(tick);
     }
-    const counters = document.querySelectorAll('[data-count]');
-    if (counters.length) {
-        const co = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); co.unobserve(e.target); } });
-        }, { threshold: 0.5 });
-        counters.forEach(el => co.observe(el));
-    }
+    window.initCounters = function() {
+        const counters = document.querySelectorAll('[data-count]:not(.counted)');
+        if (counters.length) {
+            const co = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('counted'); animateCount(e.target); co.unobserve(e.target); } });
+            }, { threshold: 0.5 });
+            counters.forEach(el => co.observe(el));
+        }
+    };
+    window.initCounters();
     // ── Hero particles ──
     const particles = document.getElementById('heroParticles');
     if (particles) {
