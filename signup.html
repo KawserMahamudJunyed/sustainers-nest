@@ -22,10 +22,10 @@
             <div class="breadcrumb">
                 <a href="/">Home</a>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                <span>Sign Up</span>
+                <span>Join Now</span>
             </div>
-            <h1>Create Your <span class="gradient-text">Account</span></h1>
-            <p>Join Sustainers NEST and become part of a community building a sustainable future.</p>
+            <h1>Join the <span class="gradient-text">NEST</span></h1>
+            <p>Create your account and apply to become part of a community building a sustainable future.</p>
         </div>
     </section>
 
@@ -43,6 +43,25 @@
                         <input type="email" id="signupEmail" placeholder="you@example.com" required>
                     </div>
                     <div class="form-group form-full">
+                        <label for="signupPhone">Phone</label>
+                        <input type="tel" id="signupPhone" placeholder="+880 1XXX-XXXXXX">
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="signupRole">I want to…</label>
+                        <select id="signupRole" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option>Volunteer</option>
+                            <option>Partner with NEST</option>
+                            <option>Become a Member</option>
+                            <option>Donate</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="signupMessage">Tell us about yourself</label>
+                        <textarea id="signupMessage" placeholder="Your background, interests, and how you'd like to contribute…" rows="4"></textarea>
+                    </div>
+                    <div class="form-group form-full">
                         <label for="signupPassword">Password</label>
                         <div class="password-wrapper">
                             <input type="password" id="signupPassword" placeholder="Choose a password (min 6 chars)" required minlength="6">
@@ -54,7 +73,7 @@
                     </div>
                     <div class="form-group form-full">
                         <button type="submit" class="btn btn-primary btn-full" id="signupBtn">
-                            Create Account
+                            Join Now
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                     </div>
@@ -99,12 +118,22 @@
                     document.getElementById('signupPassword').value,
                     document.getElementById('signupName').value
                 );
-                if (typeof showToast === 'function') showToast('Account created! Redirecting to sign in...', 'success');
+
+                // Create the join application
+                await supabase.from('join_applications').insert({
+                    name: document.getElementById('signupName').value,
+                    email: document.getElementById('signupEmail').value,
+                    phone: document.getElementById('signupPhone').value || '',
+                    role: document.getElementById('signupRole').value,
+                    message: document.getElementById('signupMessage').value || ''
+                });
+
+                if (typeof showToast === 'function') showToast('Account created & Application submitted! Redirecting...', 'success');
                 setTimeout(() => {
                     window.location.href = '/signin';
-                }, 1200);
+                }, 1500);
             } catch (err) {
-                errEl.textContent = err.message || 'Could not create account.';
+                errEl.textContent = err.message || 'Could not process your application.';
                 errEl.style.display = 'block';
             } finally {
                 if (typeof setButtonLoading === 'function') setButtonLoading(btn, false);
