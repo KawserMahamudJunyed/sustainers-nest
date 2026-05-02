@@ -217,6 +217,19 @@ function wireJoinForm() {
         const btn = form.querySelector('[type="submit"]');
         setButtonLoading(btn, true);
         try {
+            // 1. Create the account via Supabase Auth
+            if (typeof signUp === 'function') {
+                const pass = document.getElementById('joinPassword')?.value;
+                if (pass) {
+                    await signUp(
+                        document.getElementById('joinEmail').value,
+                        pass,
+                        document.getElementById('joinName').value
+                    );
+                }
+            }
+
+            // 2. Insert the application
             const { error } = await supabase.from('join_applications').insert({
                 name: document.getElementById('joinName').value,
                 email: document.getElementById('joinEmail').value,
@@ -225,8 +238,10 @@ function wireJoinForm() {
                 message: document.getElementById('joinMessage')?.value || ''
             });
             if (error) throw error;
-            showToast('Application submitted! We\'ll get back to you within 48 hours. 🌱');
-            form.reset();
+            showToast('Account created & application submitted! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = '/signin';
+            }, 1500);
         } catch (err) { showToast(err.message || 'Failed to submit application.', 'error'); }
         finally { setButtonLoading(btn, false); }
     });
