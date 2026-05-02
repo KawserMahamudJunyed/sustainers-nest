@@ -2,26 +2,55 @@
    SUSTAINERS NEST — Supabase Configuration & Auth Helpers
    ═══════════════════════════════════════════════════════════ */
 
-const SUPABASE_URL = 'https://cgpvrmcqpmznmnrsqyay.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNncHZybWNxcG16bm1ucnNxeWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNzU5MDMsImV4cCI6MjA5Mjc1MTkwM30.T9Urw9hZ07mljLK547f70LyztNV0FwNdG4DHMiHcR2k';
+const FALLBACK_URL = 'https://cgpvrmcqpmznmnrsqyay.supabase.co';
+const FALLBACK_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNncHZybWNxcG16bm1ucnNxeWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNzU5MDMsImV4cCI6MjA5Mjc1MTkwM30.T9Urw9hZ07mljLK547f70LyztNV0FwNdG4DHMiHcR2k';
 
 // Initialize Supabase client
 // Save CDN library reference before var declaration overwrites window.supabase
 var _sbLib = window.supabase;
 var supabase = null;
-try {
-    if (_sbLib && _sbLib.createClient) {
-        supabase = _sbLib.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } else {
-        console.error('Supabase JS library not loaded. Check your CDN script tag.');
-    }
-} catch (e) {
-    console.error('Supabase init error:', e.message);
-}
+var supabaseInitPromise = null;
+
+window.initSupabase = async function() {
+    if (supabase) return supabase;
+    if (supabaseInitPromise) return supabaseInitPromise;
+
+    supabaseInitPromise = (async () => {
+        let url = FALLBACK_URL;
+        let key = FALLBACK_KEY;
+        try {
+            const res = await fetch('/api/config');
+            if (res.ok) {
+                const config = await res.json();
+                if (config.SUPABASE_URL || config.NEXT_PUBLIC_SUPABASE_URL) {
+                    url = config.SUPABASE_URL || config.NEXT_PUBLIC_SUPABASE_URL;
+                    key = config.SUPABASE_ANON_KEY || config.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+                }
+            }
+        } catch (e) {
+            console.warn('Could not load dynamic config, using fallback.');
+        }
+
+        if (_sbLib && _sbLib.createClient) {
+            supabase = _sbLib.createClient(url, key);
+            
+            // Listen for auth state changes
+            supabase.auth.onAuthStateChange((event, session) => {
+                if (typeof updateAuthUI === 'function') updateAuthUI();
+            });
+        } else {
+            console.error('Supabase JS library not loaded. Check your CDN script tag.');
+        }
+        return supabase;
+    })();
+
+    return supabaseInitPromise;
+};
 
 // ── Auth Helpers ──
 
 async function signIn(email, password) {
+    if (window.initSupabase) await window.initSupabase();
     if (!supabase) throw new Error('Not connected. Please refresh.');
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) throw error;
@@ -29,6 +58,7 @@ async function signIn(email, password) {
 }
 
 async function signUp(email, password, fullName) {
+    if (window.initSupabase) await window.initSupabase();
     if (!supabase) throw new Error('Not connected. Please refresh.');
     const { data, error } = await supabase.auth.signUp({
         email,
@@ -40,12 +70,14 @@ async function signUp(email, password, fullName) {
 }
 
 async function signOut() {
+    if (window.initSupabase) await window.initSupabase();
     if (!supabase) return;
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
 }
 
 async function getCurrentUser() {
+    if (window.initSupabase) await window.initSupabase();
     if (!supabase) return null;
     const { data: { user } } = await supabase.auth.getUser();
     return user;
@@ -82,12 +114,7 @@ async function updateAuthUI() {
     });
 }
 
-// Listen for auth state changes (guarded)
-if (supabase) {
-    supabase.auth.onAuthStateChange((event, session) => {
-        updateAuthUI();
-    });
-}
+// Auth state listener is now initialized within window.initSupabase
 
 // ── Toast Notification System ──
 

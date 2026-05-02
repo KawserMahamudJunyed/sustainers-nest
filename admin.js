@@ -2,8 +2,15 @@
    ADMIN DASHBOARD — Logic
    ═══════════════════════════════════════════════════════ */
 
+const ICONS = {
+    eye: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>',
+    trash: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+};
+
 // Auth guard
 (async () => {
+    if (typeof window.initSupabase === 'function') await window.initSupabase();
     const user = await getCurrentUser();
     if (!user) { window.location.href = '/signin'; return; }
     const admin = await isAdmin();
@@ -44,7 +51,7 @@ async function loadContacts() {
         <td title="${esc(c.message)}">${esc((c.message||'').substring(0,50))}...</td>
         <td>${new Date(c.created_at).toLocaleDateString()}</td>
         <td><span class="status-badge ${c.is_read?'status-read':'status-unread'}">${c.is_read?'Read':'New'}</span></td>
-        <td><button class="admin-action-btn" onclick="toggleRead('${c.id}',${!c.is_read})" title="Toggle read">👁</button> <button class="admin-action-btn danger" onclick="deleteRow('contact_submissions','${c.id}',loadContacts)" title="Delete">🗑</button></td>
+        <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="toggleRead('${c.id}',${!c.is_read})" title="Toggle read">${ICONS.eye}</button> <button class="admin-action-btn danger" onclick="deleteRow('contact_submissions','${c.id}',loadContacts)" title="Delete">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="7" class="admin-empty">No messages yet</td></tr>';
 }
 async function toggleRead(id, val) {
@@ -63,7 +70,7 @@ async function loadApplications() {
             <option value="rejected" ${a.status==='rejected'?'selected':''}>Rejected</option>
         </select></td>
         <td>${new Date(a.created_at).toLocaleDateString()}</td>
-        <td><button class="admin-action-btn danger" onclick="deleteRow('join_applications','${a.id}',loadApplications)">🗑</button></td>
+        <td><button class="admin-action-btn danger" onclick="deleteRow('join_applications','${a.id}',loadApplications)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="7" class="admin-empty">No applications yet</td></tr>';
 }
 async function updateAppStatus(id, status) {
@@ -77,7 +84,7 @@ async function loadEvents() {
     document.getElementById('eventsTable').innerHTML = (data||[]).map(e => `<tr>
         <td>${esc(e.title)}</td><td>${esc(e.event_date)}</td><td>${e.icon_type}</td>
         <td><span class="status-badge ${e.is_upcoming?'status-accepted':'status-read'}">${e.is_upcoming?'Upcoming':'Past'}</span></td>
-        <td><button class="admin-action-btn" onclick="editEvent('${e.id}')">✏️</button> <button class="admin-action-btn danger" onclick="deleteRow('events','${e.id}',loadEvents)">🗑</button></td>
+        <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editEvent('${e.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('events','${e.id}',loadEvents)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="5" class="admin-empty">No events</td></tr>';
     window._eventsData = data;
 }
@@ -109,7 +116,7 @@ async function loadPrograms() {
     const { data } = await supabase.from('programs').select('*').order('sort_order');
     document.getElementById('programsTable').innerHTML = (data||[]).map(p => `<tr>
         <td>${esc(p.title)}</td><td>${esc(p.tag)}</td>
-        <td><button class="admin-action-btn" onclick="editProgram('${p.id}')">✏️</button> <button class="admin-action-btn danger" onclick="deleteRow('programs','${p.id}',loadPrograms)">🗑</button></td>
+        <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editProgram('${p.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('programs','${p.id}',loadPrograms)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="3" class="admin-empty">No programs</td></tr>';
     window._programsData = data;
 }
@@ -137,7 +144,7 @@ async function loadAnnouncements() {
     const { data } = await supabase.from('announcements').select('*').order('sort_order');
     document.getElementById('announcementsTable').innerHTML = (data||[]).map(a => `<tr>
         <td>${esc(a.title)}</td><td>${esc(a.date_label)}</td>
-        <td><button class="admin-action-btn" onclick="editAnn('${a.id}')">✏️</button> <button class="admin-action-btn danger" onclick="deleteRow('announcements','${a.id}',loadAnnouncements)">🗑</button></td>
+        <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editAnn('${a.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('announcements','${a.id}',loadAnnouncements)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="3" class="admin-empty">No announcements</td></tr>';
     window._annData = data;
 }
@@ -165,7 +172,7 @@ async function loadTeam() {
     const { data } = await supabase.from('team_members').select('*').order('sort_order');
     document.getElementById('teamTable').innerHTML = (data||[]).map(t => `<tr>
         <td>${esc(t.initials)}</td><td>${esc(t.name)}</td><td>${esc(t.role)}</td>
-        <td><button class="admin-action-btn" onclick="editTeam('${t.id}')">✏️</button> <button class="admin-action-btn danger" onclick="deleteRow('team_members','${t.id}',loadTeam)">🗑</button></td>
+        <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editTeam('${t.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('team_members','${t.id}',loadTeam)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="4" class="admin-empty">No team members</td></tr>';
     window._teamData = data;
 }
@@ -196,7 +203,7 @@ async function loadStats() {
         <td>${esc(s.label)}</td>
         <td><input type="number" value="${s.value}" onchange="updateStat('${s.id}',this.value)" style="width:80px;background:var(--bg-dark);color:var(--text-white);border:1px solid var(--border-subtle);border-radius:6px;padding:4px 8px;font-size:.85rem;"></td>
         <td>${s.page}</td><td>${s.stat_group}</td>
-        <td><button class="admin-action-btn danger" onclick="deleteRow('site_stats','${s.id}',loadStats)">🗑</button></td>
+        <td><button class="admin-action-btn danger" onclick="deleteRow('site_stats','${s.id}',loadStats)">${ICONS.trash}</button></td>
     </tr>`).join('');
 }
 async function updateStat(id, val) {
@@ -210,7 +217,7 @@ async function loadSubscribers() {
     document.getElementById('subCount').textContent = `${(data||[]).length} subscribers`;
     document.getElementById('subscribersTable').innerHTML = (data||[]).map(s => `<tr>
         <td>${esc(s.email)}</td><td>${new Date(s.subscribed_at).toLocaleDateString()}</td>
-        <td><button class="admin-action-btn danger" onclick="deleteRow('newsletter_subscribers','${s.id}',loadSubscribers)">🗑</button></td>
+        <td><button class="admin-action-btn danger" onclick="deleteRow('newsletter_subscribers','${s.id}',loadSubscribers)">${ICONS.trash}</button></td>
     </tr>`).join('') || '<tr><td colspan="3" class="admin-empty">No subscribers yet</td></tr>';
     window._subsData = data;
 }

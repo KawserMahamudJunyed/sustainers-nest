@@ -82,8 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isOpen) { item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
         });
     });
-    // ── Auth UI update ──
-    if (typeof updateAuthUI === 'function') updateAuthUI();
-    // ── Load dynamic content ──
-    if (typeof loadPageContent === 'function') loadPageContent();
+    // ── Initialize Supabase and load content ──
+    if (typeof window.initSupabase === 'function') {
+        window.initSupabase().then(() => {
+            if (typeof updateAuthUI === 'function') updateAuthUI();
+            if (typeof loadPageContent === 'function') loadPageContent();
+        });
+    } else {
+        if (typeof updateAuthUI === 'function') updateAuthUI();
+        if (typeof loadPageContent === 'function') loadPageContent();
+    }
 });
