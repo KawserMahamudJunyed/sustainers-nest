@@ -5,7 +5,8 @@
 const ICONS = {
     eye: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
     edit: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>',
-    trash: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
+    trash: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+    image: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>'
 };
 
 // Auth guard
@@ -16,7 +17,39 @@ const ICONS = {
     const admin = await isAdmin();
     if (!admin) { window.location.href = '/'; return; }
     loadOverview();
+    initAdminSidebar();
 })();
+
+// Mobile sidebar toggle
+function initAdminSidebar() {
+    const toggle = document.getElementById('adminMenuToggle');
+    const sidebar = document.getElementById('adminSidebar');
+    const overlay = document.getElementById('adminSidebarOverlay');
+    
+    if (toggle && sidebar) {
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+        });
+        
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+        }
+        
+        // Close sidebar when clicking nav buttons on mobile
+        sidebar.querySelectorAll('.admin-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    sidebar.classList.remove('open');
+                    if (overlay) overlay.classList.remove('open');
+                }
+            });
+        });
+    }
+}
 
 // Panel switching
 function showPanel(name) {
@@ -82,10 +115,11 @@ async function updateAppStatus(id, status) {
 async function loadEvents() {
     const { data } = await supabase.from('events').select('*').order('sort_order');
     document.getElementById('eventsTable').innerHTML = (data||[]).map(e => `<tr>
+        <td style="width:60px;">${e.image_url ? `<img src="${e.image_url}" style="width:50px;height:35px;object-fit:cover;border-radius:4px;">` : '<span style="color:var(--text-muted);font-size:0.75rem;">No image</span>'}</td>
         <td>${esc(e.title)}</td><td>${esc(e.event_date)}</td><td>${e.icon_type}</td>
         <td><span class="status-badge ${e.is_upcoming?'status-accepted':'status-read'}">${e.is_upcoming?'Upcoming':'Past'}</span></td>
         <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editEvent('${e.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('events','${e.id}',loadEvents)">${ICONS.trash}</button></td>
-    </tr>`).join('') || '<tr><td colspan="5" class="admin-empty">No events</td></tr>';
+    </tr>`).join('') || '<tr><td colspan="6" class="admin-empty">No events</td></tr>';
     window._eventsData = data;
 }
 function editEvent(id) {
@@ -97,15 +131,50 @@ function editEvent(id) {
     document.getElementById('evIcon').value = e.icon_type;
     document.getElementById('evUpcoming').value = String(e.is_upcoming);
     document.getElementById('evId').value = e.id;
+    document.getElementById('evImageUrl').value = e.image_url || '';
+    
+    // Show current image if exists
+    const currentImg = document.getElementById('evCurrentImage');
+    if (e.image_url) {
+        currentImg.innerHTML = `<img src="${e.image_url}" alt="Current"><p>Current image</p>`;
+        currentImg.style.display = 'block';
+    } else {
+        currentImg.style.display = 'none';
+    }
+    removeImagePreview('ev');
+    
     document.getElementById('eventFormTitle').textContent = 'Edit Event';
     document.getElementById('eventForm').style.display = '';
 }
 async function saveEvent() {
     const id = document.getElementById('evId').value;
-    const obj = { title: document.getElementById('evTitle').value, event_date: document.getElementById('evDate').value, description: document.getElementById('evDesc').value, icon_type: document.getElementById('evIcon').value, is_upcoming: document.getElementById('evUpcoming').value === 'true' };
+    const fileInput = document.getElementById('evImageFile');
+    let imageUrl = document.getElementById('evImageUrl').value;
+    
+    // Upload image if new file selected
+    if (fileInput.files.length > 0) {
+        const uploadedUrl = await uploadImage(fileInput.files[0], 'events');
+        if (uploadedUrl) imageUrl = uploadedUrl;
+    }
+    
+    const obj = { 
+        title: document.getElementById('evTitle').value, 
+        event_date: document.getElementById('evDate').value, 
+        description: document.getElementById('evDesc').value, 
+        icon_type: document.getElementById('evIcon').value, 
+        is_upcoming: document.getElementById('evUpcoming').value === 'true',
+        image_url: imageUrl || null
+    };
+    
     if (id) await supabase.from('events').update(obj).eq('id', id);
     else await supabase.from('events').insert(obj);
+    
+    // Reset form
     document.getElementById('evId').value = '';
+    document.getElementById('evImageUrl').value = '';
+    document.getElementById('evImageFile').value = '';
+    document.getElementById('evCurrentImage').style.display = 'none';
+    removeImagePreview('ev');
     document.getElementById('eventForm').style.display = 'none';
     document.getElementById('eventFormTitle').textContent = 'New Event';
     showToast('Event saved!'); loadEvents();
@@ -115,9 +184,10 @@ async function saveEvent() {
 async function loadPrograms() {
     const { data } = await supabase.from('programs').select('*').order('sort_order');
     document.getElementById('programsTable').innerHTML = (data||[]).map(p => `<tr>
+        <td style="width:60px;">${p.image_url ? `<img src="${p.image_url}" style="width:50px;height:35px;object-fit:cover;border-radius:4px;">` : '<span style="color:var(--text-muted);font-size:0.75rem;">No image</span>'}</td>
         <td>${esc(p.title)}</td><td>${esc(p.tag)}</td>
         <td style="display:flex;gap:0.5rem;"><button class="admin-action-btn" onclick="editProgram('${p.id}')">${ICONS.edit}</button> <button class="admin-action-btn danger" onclick="deleteRow('programs','${p.id}',loadPrograms)">${ICONS.trash}</button></td>
-    </tr>`).join('') || '<tr><td colspan="3" class="admin-empty">No programs</td></tr>';
+    </tr>`).join('') || '<tr><td colspan="4" class="admin-empty">No programs</td></tr>';
     window._programsData = data;
 }
 function editProgram(id) {
@@ -127,15 +197,50 @@ function editProgram(id) {
     document.getElementById('pgTag').value = p.tag;
     document.getElementById('pgDesc').value = p.description||'';
     document.getElementById('pgId').value = p.id;
+    document.getElementById('pgImageUrl').value = p.image_url || '';
+    
+    // Show current image if exists
+    const currentImg = document.getElementById('pgCurrentImage');
+    if (p.image_url) {
+        currentImg.innerHTML = `<img src="${p.image_url}" alt="Current"><p>Current image</p>`;
+        currentImg.style.display = 'block';
+    } else {
+        currentImg.style.display = 'none';
+    }
+    removeImagePreview('pg');
+    
+    document.getElementById('programFormTitle').textContent = 'Edit Program';
     document.getElementById('programForm').style.display = '';
 }
 async function saveProgram() {
     const id = document.getElementById('pgId').value;
-    const obj = { title: document.getElementById('pgTitle').value, tag: document.getElementById('pgTag').value, description: document.getElementById('pgDesc').value };
+    const fileInput = document.getElementById('pgImageFile');
+    let imageUrl = document.getElementById('pgImageUrl').value;
+    
+    // Upload image if new file selected
+    if (fileInput.files.length > 0) {
+        const uploadedUrl = await uploadImage(fileInput.files[0], 'programs');
+        if (uploadedUrl) imageUrl = uploadedUrl;
+    }
+    
+    const obj = { 
+        title: document.getElementById('pgTitle').value, 
+        tag: document.getElementById('pgTag').value, 
+        description: document.getElementById('pgDesc').value,
+        image_url: imageUrl || null
+    };
+    
     if (id) await supabase.from('programs').update(obj).eq('id', id);
     else await supabase.from('programs').insert(obj);
+    
+    // Reset form
     document.getElementById('pgId').value = '';
+    document.getElementById('pgImageUrl').value = '';
+    document.getElementById('pgImageFile').value = '';
+    document.getElementById('pgCurrentImage').style.display = 'none';
+    removeImagePreview('pg');
     document.getElementById('programForm').style.display = 'none';
+    document.getElementById('programFormTitle').textContent = 'New Program';
     showToast('Program saved!'); loadPrograms();
 }
 
@@ -236,3 +341,87 @@ async function deleteRow(table, id, reload) {
 }
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 async function handleLogout(e) { e.preventDefault(); await signOut(); window.location.href = '/'; }
+
+// ── IMAGE UPLOAD HELPERS ──
+function previewImage(input, previewId) {
+    const container = document.getElementById(previewId + 'Container');
+    const preview = document.getElementById(previewId);
+    
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+            showToast('Image must be less than 5MB', 'error');
+            input.value = '';
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.src = e.target.result;
+            container.classList.add('has-image');
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function removeImagePreview(prefix) {
+    const container = document.getElementById(prefix + 'ImagePreviewContainer');
+    const preview = document.getElementById(prefix + 'ImagePreview');
+    const input = document.getElementById(prefix + 'ImageFile');
+    
+    if (container) container.classList.remove('has-image');
+    if (preview) preview.src = '';
+    if (input) input.value = '';
+}
+
+async function uploadImage(file, folder) {
+    try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${folder}/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+        
+        const { data, error } = await supabase.storage
+            .from('images')
+            .upload(fileName, file, {
+                cacheControl: '3600',
+                upsert: false
+            });
+        
+        if (error) {
+            console.error('Upload error:', error);
+            showToast('Failed to upload image', 'error');
+            return null;
+        }
+        
+        // Get public URL
+        const { data: urlData } = supabase.storage
+            .from('images')
+            .getPublicUrl(fileName);
+        
+        return urlData.publicUrl;
+    } catch (err) {
+        console.error('Upload exception:', err);
+        showToast('Failed to upload image', 'error');
+        return null;
+    }
+}
+
+// Drag and drop handlers
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.image-upload-area').forEach(area => {
+        ['dragenter', 'dragover'].forEach(evt => {
+            area.addEventListener(evt, (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+        });
+        
+        ['dragleave', 'drop'].forEach(evt => {
+            area.addEventListener(evt, (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+            });
+        });
+    });
+});

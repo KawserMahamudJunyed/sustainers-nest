@@ -71,7 +71,12 @@ async function loadIndexPage() {
     // Featured programs
     const progGrid = document.getElementById('featuredPrograms');
     if (progGrid && programs) {
-        progGrid.innerHTML = programs.map(p => `<div class="program-card card reveal"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p><a href="/programs" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>`).join('');
+        progGrid.innerHTML = programs.map(p => {
+            const imgSection = p.image_url 
+                ? `<div class="program-card-img"><img src="${p.image_url}" alt="${p.title}"></div>` 
+                : '';
+            return `<div class="program-card card reveal" style="${p.image_url ? 'padding:0;overflow:hidden;' : ''}">${imgSection}<div style="${p.image_url ? 'padding:1.5rem;' : ''}"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p><a href="/programs" class="program-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div></div>`;
+        }).join('');
     }
 }
 function animateC(el){const t=parseInt(el.dataset.count,10),d=2e3,s=performance.now();function e(t){return t===1?1:1-Math.pow(2,-10*t)}function k(n){const p=Math.min((n-s)/d,1);el.textContent=Math.floor(e(p)*t).toLocaleString();if(p<1)requestAnimationFrame(k);else el.textContent=t.toLocaleString()}requestAnimationFrame(k)}
@@ -119,7 +124,12 @@ async function loadProgramsPage() {
     ]);
     const grid = document.getElementById('programsGrid');
     if (grid && programs) {
-        grid.innerHTML = programs.map(p => `<div class="program-card card reveal"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p></div>`).join('');
+        grid.innerHTML = programs.map(p => {
+            const imgSection = p.image_url 
+                ? `<div class="program-card-img"><img src="${p.image_url}" alt="${p.title}"></div>` 
+                : '';
+            return `<div class="program-card card reveal" style="${p.image_url ? 'padding:0;overflow:hidden;' : ''}">${imgSection}<div style="${p.image_url ? 'padding:1.5rem;' : ''}"><span class="program-tag ${TAG_CLASSES[p.tag]||'tag-nature'}">${p.tag}</span><h3>${p.title}</h3><p>${p.description}</p></div></div>`;
+        }).join('');
     }
     const sr = document.getElementById('programStats');
     if (sr && stats) {
@@ -148,7 +158,10 @@ async function loadEventsPage() {
 }
 function eventCardHtml(e, showRegister) {
     const icon = ICONS[e.icon_type] || ICONS.nature;
-    return `<div class="event-card card reveal"><div class="event-card-img"><svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${icon.replace(/<\/?svg[^>]*>/g,'')}</svg><span class="event-date-badge">${e.event_date}</span></div><div class="event-card-body"><h3>${e.title}</h3><p>${e.description}</p>${showRegister?`<a href="#" class="program-link event-register-btn" data-event-id="${e.id}" data-event-name="${e.title}">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>`:''}</div></div>`;
+    const imgContent = e.image_url 
+        ? `<img src="${e.image_url}" alt="${e.title}" style="width:100%;height:100%;object-fit:cover;">` 
+        : `<svg class="event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">${icon.replace(/<\/?svg[^>]*>/g,'')}</svg>`;
+    return `<div class="event-card card reveal"><div class="event-card-img">${imgContent}<span class="event-date-badge">${e.event_date}</span></div><div class="event-card-body"><h3>${e.title}</h3><p>${e.description}</p>${showRegister?`<a href="#" class="program-link event-register-btn" data-event-id="${e.id}" data-event-name="${e.title}">Register <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>`:''}</div></div>`;
 }
 
 // ── CONTACT PAGE ──

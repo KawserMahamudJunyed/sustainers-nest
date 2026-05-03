@@ -13,14 +13,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
+        // Toggle menu
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('open');
             document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
+        // Close on link click
         navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-            hamburger.classList.remove('active'); navLinks.classList.remove('open'); document.body.style.overflow = '';
+            hamburger.classList.remove('active'); 
+            navLinks.classList.remove('open'); 
+            document.body.style.overflow = '';
         }));
+        // Close on overlay click (the ::before pseudo element area)
+        navLinks.addEventListener('click', (e) => {
+            if (e.target === navLinks) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+        // Prevent swipe from opening nav
+        document.body.addEventListener('touchstart', (e) => {
+            if (!navLinks.classList.contains('open')) return;
+            const touch = e.touches[0];
+            if (touch.clientX < window.innerWidth - 280) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        }, { passive: true });
     }
     // ── Active nav link ──
     const currentPage = location.pathname.split('/').pop() || '';
