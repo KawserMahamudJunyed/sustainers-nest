@@ -21,6 +21,14 @@ function getPageName() {
 }
 
 async function loadPageContent() {
+    // Ensure Supabase is initialized before loading content
+    if (typeof window.initSupabase === 'function') {
+        await window.initSupabase();
+    }
+    if (!supabase) {
+        console.error('Supabase client not initialized');
+        return;
+    }
     const page = getPageName();
     try {
         if (page === 'index') await loadIndexPage();

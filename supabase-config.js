@@ -2,8 +2,8 @@
    SUSTAINERS NEST — Supabase Configuration & Auth Helpers
    ═══════════════════════════════════════════════════════════ */
 
-const FALLBACK_URL = 'https://cgpvrmcqpmznmnrsqyay.supabase.co';
-const FALLBACK_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNncHZybWNxcG16bm1ucnNxeWF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNzU5MDMsImV4cCI6MjA5Mjc1MTkwM30.T9Urw9hZ07mljLK547f70LyztNV0FwNdG4DHMiHcR2k';
+const FALLBACK_URL = 'https://qxtbzsrmdihlljnrmuxp.supabase.co';
+const FALLBACK_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4dGJ6c3JtZGlobGxqbnJtdXhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDYyNjc3OTUsImV4cCI6MjA2MTg0Mzc5NX0.iqcwFYNxlWpXpL7P16oy70jKN0p6kKPLxxwmrRBk-tY';
 
 // Initialize Supabase client
 // Save CDN library reference before var declaration overwrites window.supabase
