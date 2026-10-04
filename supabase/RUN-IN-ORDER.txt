@@ -1,0 +1,11 @@
+Create admin@sustainersnest.org under Authentication -> Users first.
+
+Then run:
+1. 01-CREATE-TABLES.sql
+2. 02-SECURITY-RLS-STORAGE.sql
+3. 03-SEED-DATA-AND-ADMIN.sql
+
+Optional:
+4. 04-VERIFY-OPTIONAL.sql
+
+Do not use SQL files from older website packages.

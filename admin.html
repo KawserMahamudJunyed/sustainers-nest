@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow,noarchive"/>
+<meta name="referrer" content="no-referrer"/>
+<title>Admin Portal | Sustainers NEST</title>
+<link rel="icon" href="assets/favicon.jpg" type="image/jpeg"/>
+<link rel="stylesheet" href="assets/admin.css?v=20261004-v2"/>
+</head>
+<body>
+<main class="admin-shell">
+  <section class="login-stage" id="loginPanel">
+    <header class="login-portal-nav">
+      <a class="portal-brand" href="index.html" aria-label="Sustainers NEST home">
+        <img src="assets/sustainer-nest-logo-nav-matched.jpg" alt="Sustainers NEST"/>
+      </a>
+      <div class="portal-nav-meta"><span class="portal-leaf-dot" aria-hidden="true"></span><span>Private website portal</span></div>
+    </header>
+    <div class="login-story" aria-hidden="true">
+      <div class="login-story-mark"><span></span><span></span><span></span></div>
+      <div class="login-story-copy">
+        <div class="kicker light">PRIVATE PORTAL</div>
+        <h2>Keep the movement current.</h2>
+        <p>Manage activities, people, impact and public updates without changing the website code.</p>
+      </div>
+      <div class="login-story-foot">Sustainers NEST · Content Administration</div>
+    </div>
+
+    <section class="login-card">
+      <header class="login-brand-block">
+        <div class="admin-logo-frame"><img src="assets/sustainer-nest-logo-nav-matched.jpg" alt="Sustainers NEST" class="admin-logo"/></div>
+        <div class="portal-label"><span class="portal-dot"></span> Authorized access</div>
+      </header>
+      <div class="login-copy">
+        <div class="kicker">WEBSITE ADMIN</div>
+        <h1>Welcome back.</h1>
+        <p>Sign in with an approved administrator or editor account.</p>
+      </div>
+      <form id="loginForm" class="admin-form login-form" autocomplete="on">
+        <label>Email address<input name="email" type="email" autocomplete="username" inputmode="email" placeholder="admin@sustainersnest.org" maxlength="254" required/></label>
+        <label>Password
+          <span class="password-wrap"><input name="password" type="password" autocomplete="current-password" placeholder="Your password" maxlength="300" required/><button class="password-toggle" type="button" data-password-toggle aria-label="Show password">Show</button></span>
+        </label>
+        <button class="primary login-submit" type="submit">Sign in securely</button>
+        <p class="form-message" id="loginMessage" role="status" aria-live="polite"></p>
+      </form>
+      <div class="login-feature-strip" aria-label="Portal capabilities">
+        <span>Activities</span><span>Team</span><span>Impact</span><span>Inbox</span>
+      </div>
+      <div class="login-security-note"><strong>Protected admin area</strong><span>Private server session · role-based access · change audit trail</span></div>
+    </section>
+  </section>
+
+  <section class="admin-app" id="adminApp" hidden>
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand">
+        <div class="admin-brand-logo"><img src="assets/sustainer-nest-logo-nav-matched.jpg" alt="Sustainers NEST"/></div>
+        <div><strong>Sustainers NEST</strong><small>Website administration</small></div>
+      </div>
+      <nav id="adminNav" aria-label="Admin sections">
+        <div class="nav-section-label">Website</div>
+        <button data-view="overview" class="active">Overview</button>
+        <button data-view="activities">Activities</button>
+        <button data-view="homepage">Homepage</button>
+        <button data-view="team">Team</button>
+        <button data-view="impact">Impact</button>
+        <div class="nav-section-label" data-admin-only>Organization</div>
+        <button data-view="contacts" data-admin-only>Contact inbox</button>
+        <button data-view="volunteers" data-admin-only>Volunteer applications</button>
+        <button data-view="access" data-admin-only>Admin access</button>
+        <button data-view="audit" data-admin-only>Audit log</button>
+        <div class="nav-section-label">Account</div>
+        <button data-view="security">Security</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="identity-card"><strong id="adminIdentityName">Administrator</strong><span id="adminIdentity"></span></div>
+        <button class="sidebar-signout" id="logoutBtn">Sign out</button>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-title">
+          <button id="mobileNavBtn" aria-label="Open admin navigation" aria-expanded="false">Menu</button>
+          <div><div class="kicker">SUSTAINERS NEST CMS</div><h2 id="viewTitle">Overview</h2></div>
+        </div>
+        <div class="topbar-actions"><span class="role-chip" id="roleChip">Editor</span><a href="index.html" target="_blank" rel="noopener noreferrer">View website ↗</a></div>
+      </header>
+      <div class="setup-warning" id="setupWarning" hidden role="alert"></div>
+
+      <section class="admin-view active" data-view-panel="overview">
+        <div class="overview-hero panel panel-hero">
+          <div><div class="kicker">CONTENT CONTROL</div><h3>Keep the public website accurate.</h3><p>Update the information that changes regularly while the core visual design stays protected in code.</p></div>
+          <div class="hero-leaf" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="stat-grid" id="overviewStats"></div>
+        <div class="overview-grid">
+          <div class="panel"><div class="panel-eyebrow">Your permissions</div><h3 id="permissionTitle">Website editor</h3><p id="permissionCopy">You can manage public website content. Permanent deletion and private organization data are restricted to administrators.</p></div>
+          <div class="panel security-summary"><div class="panel-eyebrow">Security</div><h3>Server-protected administration</h3><div class="security-badges"><span>HttpOnly session</span><span>CSRF protection</span><span>Audit logging</span><span>Least privilege</span></div></div>
+        </div>
+      </section>
+
+      <section class="admin-view" data-view-panel="activities">
+        <div class="panel"><div class="panel-head"><div><div class="panel-eyebrow">PUBLIC CONTENT</div><h3>Activities</h3><p>Manage documented activities and choose which ones are featured on the homepage.</p></div><button class="primary" id="newActivityBtn">Add activity</button></div><div id="activitiesList"></div></div>
+        <form class="panel admin-form editor-form" id="activityForm" hidden>
+          <input type="hidden" name="id"/><h3 id="activityFormTitle">Add activity</h3>
+          <div class="field-grid"><label>Project<select name="project_key" required><option value="seeds-of-change-artists">Seeds of Change Artists</option><option value="planting-for-the-future">Planting For The Future</option><option value="chasing-green">Chasing Green</option><option value="trash-to-treasure">Trash To Treasure</option><option value="organization">Organization-wide Advocacy</option></select></label><label>Public project label<input name="project_label" maxlength="120" required/></label></div>
+          <div class="field-grid"><label>Activity title<input name="title" maxlength="180" required/></label><label>Institute<input name="institute" maxlength="180"/></label></div>
+          <div class="field-grid"><label>Date shown on website<input name="date_label" maxlength="120" placeholder="28 September 2026" required/></label><label>Sort date<input name="sort_date" type="date" required/></label></div>
+          <label>Description<textarea name="description" rows="5" maxlength="4000" required></textarea></label>
+          <div class="field-grid"><label>Detail page / link<input name="detail_url" maxlength="800" placeholder="project-chasing.html#activity..."/></label><label>Status label<input name="status_label" maxlength="60" value="Completed"/></label></div>
+          <div class="media-field-grid"><label>Thumbnail URL<input name="thumbnail_url" maxlength="800"/></label><label class="upload-field">Upload thumbnail<input name="thumbnail_file" type="file" accept="image/jpeg,image/png,image/webp"/><small>JPG, PNG or WebP. Large images are optimized before upload.</small></label></div>
+          <div class="check-row"><label><input name="featured_home" type="checkbox"/> Feature on homepage</label><label><input name="published" type="checkbox" checked/> Published</label></div>
+          <div class="form-actions"><button class="primary" type="submit">Save activity</button><button type="button" class="ghost" data-cancel-form="activityForm">Cancel</button></div><p class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-view" data-view-panel="homepage">
+        <form class="panel admin-form" id="homepageForm">
+          <div class="panel-head compact"><div><div class="panel-eyebrow">FEATURED VISUAL</div><h3>Homepage image</h3><p>Replace, hide or restore the image displayed in the homepage brand section.</p></div></div>
+          <div class="homepage-editor-grid"><div class="homepage-preview" id="homepagePreview"><span>No image selected</span></div><div class="admin-form nested-form"><label>Image URL<input name="image_url" maxlength="800"/></label><label>Alternative text<input name="alt" maxlength="220"/></label><label class="upload-field">Upload replacement<input name="image_file" type="file" accept="image/jpeg,image/png,image/webp"/><small>Use a clear landscape image for the strongest result.</small></label><label class="check-inline"><input name="enabled" type="checkbox"/> Show image on homepage</label></div></div>
+          <div class="form-actions"><button class="primary" type="submit">Save homepage</button><button type="button" class="danger" id="removeHomepageImage">Hide image</button></div><p class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-view" data-view-panel="team">
+        <div class="panel"><div class="panel-head"><div><div class="panel-eyebrow">PEOPLE</div><h3>Team members</h3><p>Manage Executive Team, Coordinator Team and Volunteer profiles.</p></div><button class="primary" id="newTeamBtn">Add member</button></div><div id="teamList"></div></div>
+        <form class="panel admin-form editor-form" id="teamForm" hidden>
+          <input type="hidden" name="id"/><h3 id="teamFormTitle">Add team member</h3>
+          <div class="field-grid"><label>Team<select name="team_group"><option value="executive">Executive Team</option><option value="coordinator">Coordinator Team</option><option value="volunteer">Volunteers</option></select></label><label>Display order<input name="sort_order" type="number" min="0" max="9999" value="100"/></label></div>
+          <div class="field-grid"><label>Name<input name="name" maxlength="140" required/></label><label>Position / title<input name="role_title" maxlength="160" required/></label></div>
+          <label>Motto<input name="motto" maxlength="300"/></label>
+          <div class="media-field-grid"><label>Photo URL<input name="photo_url" maxlength="800"/></label><label class="upload-field">Upload photo<input name="photo_file" type="file" accept="image/jpeg,image/png,image/webp"/><small>Leave both photo fields empty for a photo-free profile.</small></label></div>
+          <label>Photo focus<input name="photo_position" maxlength="60" placeholder="center 25%"/><small class="field-help">Advanced: CSS image position, for example center 20%.</small></label>
+          <div class="check-row"><label><input name="published" type="checkbox" checked/> Published</label></div>
+          <div class="form-actions"><button class="primary" type="submit">Save member</button><button type="button" class="ghost" data-cancel-form="teamForm">Cancel</button></div><p class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-view" data-view-panel="impact">
+        <div class="panel"><div class="panel-head"><div><div class="panel-eyebrow">MEASURABLE CHANGE</div><h3>Impact metrics</h3><p>Update figures shown across the homepage and Impact page.</p></div><button class="primary" id="newImpactBtn">Add metric</button></div><div id="impactList"></div></div>
+        <form class="panel admin-form editor-form" id="impactForm" hidden>
+          <input type="hidden" name="original_key"/><div class="field-grid"><label>Metric key<input name="metric_key" maxlength="60" placeholder="trees" required/></label><label>Public label<input name="label" maxlength="120" required/></label></div><div class="field-grid"><label>Number<input name="value_number" type="number" min="0" required/></label><label>Suffix<input name="suffix" maxlength="12" placeholder="+"/></label></div><div class="field-grid"><label>Display order<input name="sort_order" type="number" min="0" max="9999" value="100"/></label><label class="check-inline"><input name="published" type="checkbox" checked/> Published</label></div><div class="form-actions"><button class="primary" type="submit">Save metric</button><button type="button" class="ghost" data-cancel-form="impactForm">Cancel</button></div><p class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-view" data-view-panel="contacts"><div class="panel"><div class="panel-eyebrow">PRIVATE INBOX</div><h3>Contact messages</h3><p class="panel-intro">Visible only to administrators.</p><div id="contactsList"></div></div></section>
+      <section class="admin-view" data-view-panel="volunteers"><div class="panel"><div class="panel-eyebrow">PRIVATE INBOX</div><h3>Volunteer applications</h3><p class="panel-intro">Visible only to administrators.</p><div id="volunteersList"></div></div></section>
+
+      <section class="admin-view" data-view-panel="access">
+        <div class="panel"><div class="panel-eyebrow">ACCESS CONTROL</div><h3>Authorized accounts</h3><p class="panel-intro">Admins can create, disable and change website roles. Your own role cannot be changed here, and the last administrator is protected.</p><div id="accessList"></div></div>
+        <form class="panel admin-form" id="accessForm">
+          <div class="panel-head compact"><div><h3>Create admin or editor</h3><p>The new user must replace the temporary password after the first sign-in.</p></div></div>
+          <div class="field-grid"><label>Name<input name="displayName" maxlength="100" required/></label><label>Email<input name="email" type="email" maxlength="254" required/></label></div>
+          <div class="field-grid"><label>Temporary password<span class="password-wrap"><input name="password" type="password" minlength="12" maxlength="200" required/><button class="password-toggle" type="button" data-password-toggle>Show</button></span><small>12+ characters with uppercase, lowercase, number and symbol.</small></label><label>Role<select name="role"><option value="editor">Editor</option><option value="admin">Admin</option></select></label></div>
+          <div class="form-actions"><button class="primary" type="submit">Create access</button><button class="ghost" type="button" id="generatePasswordBtn">Generate strong password</button></div><p class="form-message" role="status"></p>
+        </form>
+      </section>
+
+      <section class="admin-view" data-view-panel="audit">
+        <div class="panel"><div class="panel-eyebrow">ACCOUNTABILITY</div><h3>Audit log</h3><p class="panel-intro">Recent administrative changes recorded by the server.</p><div id="auditList"></div></div>
+      </section>
+
+      <section class="admin-view" data-view-panel="security">
+        <div class="security-grid">
+          <div class="panel"><div class="panel-eyebrow">YOUR ACCOUNT</div><h3>Session security</h3><dl class="security-details"><div><dt>Email</dt><dd id="securityEmail">—</dd></div><div><dt>Role</dt><dd id="securityRole">—</dd></div><div><dt>Session storage</dt><dd>Secure HttpOnly cookies</dd></div><div><dt>Idle sign-out</dt><dd>20 minutes</dd></div></dl></div>
+          <form class="panel admin-form" id="passwordForm"><div class="panel-eyebrow">PASSWORD</div><h3>Change password</h3><p class="panel-intro">Use a unique password that is not reused on another service.</p><label>New password<span class="password-wrap"><input name="password" type="password" minlength="12" maxlength="200" autocomplete="new-password" required/><button class="password-toggle" type="button" data-password-toggle>Show</button></span></label><label>Confirm new password<input name="confirmation" type="password" minlength="12" maxlength="200" autocomplete="new-password" required/></label><button class="primary" type="submit">Update password</button><p class="form-message" role="status"></p></form>
+        </div>
+        <div class="panel security-guidance"><div class="panel-eyebrow">SECURITY PRACTICE</div><h3>Protect administrator accounts.</h3><div class="guidance-grid"><div><strong>Use individual accounts</strong><span>Never share one admin password between several people.</span></div><div><strong>Keep Admin limited</strong><span>Give Editor access unless someone truly needs private inbox and access controls.</span></div><div><strong>Remove access quickly</strong><span>Disable accounts as soon as a team member no longer needs website access.</span></div></div></div>
+      </section>
+    </div>
+  </section>
+</main>
+<div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+<script src="assets/admin.js?v=20261004-v2"></script>
+</body>
+</html>

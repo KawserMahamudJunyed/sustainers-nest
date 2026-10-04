@@ -1,0 +1,16 @@
+# Vercel local metadata
+.vercel/
+
+# Local environment files and secrets
+.env
+.env.*
+!.env.example
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
